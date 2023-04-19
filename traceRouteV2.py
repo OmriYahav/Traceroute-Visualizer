@@ -12,6 +12,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# create a logger object to be used for logging
 logger = logging.getLogger()
 
 
