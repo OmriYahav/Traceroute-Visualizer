@@ -79,8 +79,8 @@ def traceroute_route():
             else:
                 logger.info(f'Hop {i + 1}: {ip_address} - could not retrieve location data')
 
-    # map_location.save('hops.html')
-    # webbrowser.open('hops.html')
+    map_location.save('hops.html')
+    webbrowser.open('hops.html')
     return render_template('index1.html')
 
 
