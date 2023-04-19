@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traceroute Map</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        color: #333;
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 50px 0;
+      }
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #666;
+      }
+      input[type="text"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: 1rem;
+      }
+      button[type="submit"] {
+        background-color: #008CBA;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.2s ease-in-out;
+      }
+      button[type="submit"]:hover {
+        background-color: #006080;
+      }
+      #map {
+        width: 100%;
+        height: 500px;
+        margin: 50px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Traceroute Map</h1>
+    </header>
+    <main>
+      <form method="POST" action="/traceroute">
+        <label for="destination_address">Enter Destination Address:</label>
+        <input  type="text" id="destination_address" name="destination_address" required>
+        <button type="submit">Trace</button>
+      </form>
+      <div id="map"></div>
+    </main>
+    <footer></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/folium/0.12.1/folium.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#map').load('hops.html');
+      });
+    </script>
+  </body>
+</html>
