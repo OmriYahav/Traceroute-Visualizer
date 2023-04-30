@@ -33,13 +33,19 @@ Open your web browser and navigate to http://localhost:5000 to view the applicat
 Note: The above instructions assume you have Python and Git installed on your machine.
 If not, please install them before proceeding.
 
-<h2>Technologies Used</h2>
-<hr><ul>
-<li>HTML</li>
-</ul><ul>
-<li>CSS</li>
-</ul><ul>
-<li>JavaScript</li>
-</ul><ul>
-<li>Flask</li>
-</ul>
+<h1>Technologies Used:</h1>
+<h2>Python</h2>
+The backend of this project is written in Python.
+<h2>Flask</h2>
+The web application framework used for this project is Flask, which is a lightweight and flexible framework that allows for easy web development using Python.
+<h2>Scapy</h2>
+Scapy is a Python-based packet manipulation tool used for network analysis and troubleshooting. It was used to perform the traceroute in this project.
+<h2>Folium</h2>
+Folium is a Python library used for creating interactive maps and visualizations. It was used to display the traceroute results on a map.
+<h2>Geopy</h2>
+Geopy is a Python library used for geocoding and reverse geocoding. It was used to retrieve the latitude and longitude of each hop in the traceroute.
+<h2>Requests</h2>
+Requests is a Python library used for making HTTP requests. It was used to retrieve data from external APIs.
+
+<h2>HTML/CSS/JavaScript</h2>
+The frontend of this project is written in HTML, CSS, and JavaScript. These are the standard web development technologies used for creating the user interface and interactivity of web applications.
