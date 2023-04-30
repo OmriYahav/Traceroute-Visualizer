@@ -18,10 +18,13 @@
 Overall, the code is well-structured and follows best practices for web application development in Python. However, there may be some room for improvement in terms of error handling and security, such as validating user input and handling exceptions that may be raised during the traceroute or location data retrieval processes.</p>
 
 <h2>How to Install</h2>
-Clone the repository to your local machine using the command git clone https://github.com/OmriYahav/TraceRoute-On-Map.git
-Navigate to the project directory using cd repo
-Install the required dependencies using pip install -r requirements.txt
+Clone the repository to your local machine using the command:
 
+git clone https://github.com/OmriYahav/TraceRoute-On-Map.git
+
+Navigate to the project directory using cd repo
+
+Install the required dependencies using pip install -r requirements.txt
 
 Run the application using python3 traceRouteV2.py
 
