@@ -21,10 +21,14 @@ Overall, the code is well-structured and follows best practices for web applicat
 Clone the repository to your local machine using the command git clone https://github.com/OmriYahav/TraceRoute-On-Map.git
 Navigate to the project directory using cd repo
 Install the required dependencies using pip install -r requirements.txt
-[Optional] Set up any necessary environment variables by creating a .env file in the project root and setting the variables there.
-Run the application using python app.py
+
+
+Run the application using python3 traceRouteV2.py
+
 Open your web browser and navigate to http://localhost:5000 to view the application.
-Note: The above instructions assume you have Python and Git installed on your machine. If not, please install them before proceeding.
+
+Note: The above instructions assume you have Python and Git installed on your machine.
+If not, please install them before proceeding.
 
 <h2>Technologies Used</h2>
 <hr><ul>
