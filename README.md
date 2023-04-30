@@ -1,51 +1,38 @@
-<h1>Trace Route With Folium Map</h1>
+# 🌎 Traceroute Visualizer 🌐
 
-<h3>Flask Web Ui:</h3>
+This project is a web application that allows users to visualize the path that internet packets take from their computer to a specified destination. 
+
+## 🚀 Getting Started
+1. Clone this repository.
+2. Install the required dependencies by running `pip install -r requirements.txt`.
+3. Run `python traceRouteV2.py` to start the web server.
+4. Open your web browser and go to `http://localhost:5000` to use the application.
+
+## 📸 Screenshots
+
 
 ![This is an image](img/TraceOnMapPage.PNG)
-<h3>Result:</h3>
+
 
 ![This is an image](img/HopsOnMap.PNG)
 
-<hr><p>1.The app defines a web application that performs a traceroute to a specified destination address and displays the results on a map. 
+## 🧰 Technologies Used
+- Python
+- Flask
+- Scapy
+- Geopy
+- Folium
 
-2.The application is built using Flask and makes use of several external libraries, including scapy, geopy, and folium. 
+## 🤔 How It Works
+The user inputs a destination IP address into a web form, and the application sends a series of packets to that address using the Scapy library's traceroute function. The application then extracts the IP addresses of each router that the packets pass through and uses the Geopy library to retrieve the latitude and longitude of each router. Finally, the application uses the Folium library to create a map that visualizes the path of the packets, with markers indicating the location of each router and lines connecting them.
 
-3.The traceroute is performed using the traceroute function from the scapy library, and the location data for each hop is retrieved using the ip-api.com API. 
+## 🌟 Features
+- Interactive map that allows users to zoom in and out and click on markers for more information
+- Color-coded lines between routers to help users distinguish between different parts of the path
+- Automatic reverse geocoding of router locations to display the name of the city and country where each router is located
 
-4.The location data is then displayed on a folium map, which is saved to an HTML file and opened in the user's default web browser. 
+## 🤝 Contributing
+Contributions are welcome! If you find a bug or have a feature request, please create an issue. If you want to contribute code, please fork the repository and submit a pull request.
 
-Overall, the code is well-structured and follows best practices for web application development in Python. However, there may be some room for improvement in terms of error handling and security, such as validating user input and handling exceptions that may be raised during the traceroute or location data retrieval processes.</p>
-
-<h2>How to Install</h2>
-Clone the repository to your local machine using the command:
-
-git clone https://github.com/OmriYahav/TraceRoute-On-Map.git
-
-Navigate to the project directory using cd repo
-
-Install the required dependencies using pip install -r requirements.txt
-
-Run the application using python3 traceRouteV2.py
-
-Open your web browser and navigate to http://localhost:5000 to view the application.
-
-Note: The above instructions assume you have Python and Git installed on your machine.
-If not, please install them before proceeding.
-
-<h1>Technologies Used:</h1>
-<h2>Python</h2>
-The backend of this project is written in Python.
-<h2>Flask</h2>
-The web application framework used for this project is Flask, which is a lightweight and flexible framework that allows for easy web development using Python.
-<h2>Scapy</h2>
-Scapy is a Python-based packet manipulation tool used for network analysis and troubleshooting. It was used to perform the traceroute in this project.
-<h2>Folium</h2>
-Folium is a Python library used for creating interactive maps and visualizations. It was used to display the traceroute results on a map.
-<h2>Geopy</h2>
-Geopy is a Python library used for geocoding and reverse geocoding. It was used to retrieve the latitude and longitude of each hop in the traceroute.
-<h2>Requests</h2>
-Requests is a Python library used for making HTTP requests. It was used to retrieve data from external APIs.
-
-<h2>HTML/CSS/JavaScript</h2>
-The frontend of this project is written in HTML, CSS, and JavaScript. These are the standard web development technologies used for creating the user interface and interactivity of web applications.
+## 📝 License
+This project is licensed under the MIT License. See the LICENSE file for details.
