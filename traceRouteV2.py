@@ -73,11 +73,18 @@ def traceroute_route():
                               tooltip=f'<b>Hop :{i + 1} IP :{ip_address}  Latitude : {latitude} Longitude: {longitude}</b>', # adds a tooltip with information about the hop
                               popup=f'<b>Hop {i + 1}: {ip_address}, {address}, Latitude: {latitude}, Longitude: {longitude}</b>', # adds a popup with detailed information about the hop
                               icon=folium.Icon(color='green', icon_color='white', icon='ok-circle')).add_to(map_location) # sets the marker's color and icon
-                if i < len(ans) - 1: # checks if this is not the last hop in the traceroute
-                    next_hop = ans[i + 1][1].src # gets the source IP address of the next hop
-                    folium.PolyLine(locations=[(latitude, longitude), get_location_data(next_hop)[1:]], # adds a line between the current hop and the next hop
-                                    color=colors[color_index % len(colors)]).add_to(map_location) # sets the line's color
-                    color_index += 1
+                if i < len(ans) - 1:  # checks if this is not the last hop in the traceroute
+                    next_hop = ans[i + 1][1].src  # gets the source IP address of the next hop
+                    next_hop_location = get_location_data(next_hop)  # retrieve location data once
+                    if next_hop_location:
+                        _, next_latitude, next_longitude = next_hop_location
+                        folium.PolyLine(
+                            locations=[(latitude, longitude), (next_latitude, next_longitude)],
+                            color=colors[color_index % len(colors)]
+                        ).add_to(map_location)
+                        color_index += 1
+                    else:
+                        logger.warning(f'Could not retrieve location data for next hop {next_hop}')
                 # If location data is not available, log it and continue to the next hop
 
             else:
