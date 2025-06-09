@@ -35,4 +35,4 @@ The user inputs a destination IP address into a web form, and the application se
 Contributions are welcome! If you find a bug or have a feature request, please create an issue. If you want to contribute code, please fork the repository and submit a pull request.
 
 ## 📝 License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
