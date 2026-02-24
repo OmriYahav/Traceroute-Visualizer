@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Traceroute Visualizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>Traceroute Visualizer</h1>
+    <form method="post" action="{{ url_for('traceroute_route') }}" class="card">
+      <label for="destination_address">Domain or IP address</label>
+      <input type="text" id="destination_address" name="destination_address" value="{{ destination or '' }}" required>
+      <button type="submit">Run traceroute</button>
+      {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    </form>
+  </main>
+</body>
+</html>

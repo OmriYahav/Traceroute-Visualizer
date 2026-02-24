@@ -1,38 +1,95 @@
-# 🌎 Traceroute Visualizer 🌐
+# Traceroute Visualizer
 
-This project is a web application that allows users to visualize the path that internet packets take from their computer to a specified destination. 
+Flask web app that runs Scapy traceroute, enriches hops with geolocation metadata, and renders both a hops table and an embedded Folium map in the browser.
 
-## 🚀 Getting Started
-1. Clone this repository.
-2. Install the required dependencies by running `pip install -r requirements.txt`.
-3. Run `python traceRouteV2.py` to start the web server.
-4. Open your web browser and go to `http://localhost:5000` to use the application.
+## Features
+- Flask UI with input form and results page.
+- Traceroute via **Scapy** (no OS traceroute shell calls).
+- Hops table columns: hop index, IP, RTT, city, country, ISP/ASN, status.
+- Embedded Folium map with hop markers + polyline path.
+- HTTPS geo calls (`ip-api` + Nominatim reverse geocode).
+- Retries/timeouts for outbound HTTP requests.
+- SQLite TTL cache for geo data.
+- User request rate limiting with Flask-Limiter.
+- Optional blocking of internal/reserved traceroute targets.
 
-## 📸 Screenshots
+## Project structure
+```text
+traceroute_visualizer/
+  __init__.py
+  app.py
+  services/
+    cache.py
+    geo_service.py
+    traceroute_service.py
+  templates/
+    index.html
+    results.html
+  static/
+    styles.css
+```
 
+## Requirements
+- Python 3.11+
+- Raw socket capability for Scapy traceroute (`CAP_NET_RAW`, sometimes `CAP_NET_ADMIN`)
 
-![This is an image](img/TraceOnMapPage.PNG)
+Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
+## Run locally
+```bash
+cp .env.example .env
+python -m traceroute_visualizer.app
+```
+Then open `http://localhost:5000`.
 
-![This is an image](img/HopsOnMap.PNG)
+## Configuration (.env)
+- `FLASK_ENV`, `FLASK_DEBUG`
+- `MAX_HOPS`, `TR_TIMEOUT`, `TR_RETRIES`
+- `GEO_TIMEOUT`, `GEO_RETRIES`
+- `CACHE_TTL_DAYS`, `CACHE_DB_PATH`
+- `RATE_LIMIT` (example `10/minute`)
+- `BLOCK_PRIVATE_TARGETS`
+- `LOG_LEVEL`
 
-## 🧰 Technologies Used
-- Python
-- Flask
-- Scapy
-- Geopy
-- Folium
+## Docker
+Build and run:
+```bash
+docker compose up --build
+```
 
-## 🤔 How It Works
-The user inputs a destination IP address into a web form, and the application sends a series of packets to that address using the Scapy library's traceroute function. The application then extracts the IP addresses of each router that the packets pass through and uses the Geopy library to retrieve the latitude and longitude of each router. Finally, the application uses the Folium library to create a map that visualizes the path of the packets, with markers indicating the location of each router and lines connecting them.
+Scapy requires capabilities. Compose file includes:
+- `NET_RAW`
+- `NET_ADMIN`
 
-## 🌟 Features
-- Interactive map that allows users to zoom in and out and click on markers for more information
-- Color-coded lines between routers to help users distinguish between different parts of the path
-- Automatic reverse geocoding of router locations to display the name of the city and country where each router is located
+If needed in plain Docker:
+```bash
+docker run --cap-add=NET_RAW --cap-add=NET_ADMIN -p 5000:5000 traceroute-visualizer
+```
 
-## 🤝 Contributing
-Contributions are welcome! If you find a bug or have a feature request, please create an issue. If you want to contribute code, please fork the repository and submit a pull request.
+## Tests, lint, format
+```bash
+pytest -q
+ruff check .
+black --check .
+```
 
-## 📝 License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## CI
+GitHub Actions workflow runs lint, format check, and pytest on pushes and PRs.
+
+## Limitations
+- Geo location quality depends on IP database accuracy and may be approximate.
+- Some hops do not respond (timeouts are kept in table for hop continuity).
+- Some hops have private/reserved addresses; these are marked and usually skipped for geo.
+- External APIs have rate limits; caching and limiter reduce pressure but do not remove limits.
+- Traceroute may fail without required network capabilities.
+
+## Security notes
+- Target input is validated and resolved before tracing.
+- Optional policy (`BLOCK_PRIVATE_TARGETS=true`) blocks internal/reserved targets.
+- Request limiting helps reduce abuse.
+
+## Screenshots
+Use the app and capture screenshots in your own environment (route paths vary by network and privileges).
