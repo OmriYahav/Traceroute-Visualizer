@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Results - Traceroute Visualizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="container wide">
+    <h1>Traceroute to {{ destination }} ({{ resolved_ip }})</h1>
+    <p><a href="{{ url_for('index') }}">Run another traceroute</a></p>
+
+    <section class="card">
+      <h2>Hops</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>hop_index</th><th>ip</th><th>rtt_ms</th><th>city</th><th>country</th><th>isp/asn</th><th>status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for hop in hops %}
+          <tr>
+            <td>{{ hop.hop_index }}</td>
+            <td>{{ hop.ip }}</td>
+            <td>{{ hop.rtt_ms if hop.rtt_ms is not none else '-' }}</td>
+            <td>{{ hop.city }}</td>
+            <td>{{ hop.country }}</td>
+            <td>{{ hop.isp }} / {{ hop.asn }}</td>
+            <td>{{ hop.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Route map (best effort)</h2>
+      <div class="map-wrap">{{ map_html|safe }}</div>
+    </section>
+  </main>
+</body>
+</html>
