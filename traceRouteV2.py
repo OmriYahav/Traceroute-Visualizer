@@ -8,7 +8,11 @@ import folium
 from flask import Flask, render_template, request
 
 # create a Flask application instance
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder="traceroute_visualizer/templates",
+    static_folder="traceroute_visualizer/static",
+)
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -64,7 +68,7 @@ def get_location_data(ip_address):
 
 @app.route("/")
 def index():
-    return render_template("index1.html")  # render an HTML template for the index page
+    return render_template("index.html")  # render an HTML template for the index page
 
 
 @app.route("/traceroute", methods=["POST"])
@@ -165,8 +169,8 @@ def traceroute_route():
     # Save the map as an HTML file and open it in a new browser tab
     map_location.save("hops.html")
     webbrowser.open("hops.html")
-    # Render the index1.html template
-    return render_template("index1.html")
+    # Render the index.html template
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
